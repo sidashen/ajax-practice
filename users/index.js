@@ -6,23 +6,64 @@
 
     // TODO： get user list，when success, run renderUserList
     function getListData() {
-
+      ajax({
+        url: API_ROOT,
+        method: 'GET',
+        success: function(result) {
+          renderUserList(result);
+        },  // 请求成功后调用此方法
+        fail: function(error) {
+          console.log('请求失败了哟');
+        }    // 请求失败或出错后调用此方法
+      });
     }
 
     // TODO:  add user info,when success, run addItem
     function addItemData(data) {
-
+      ajax({
+        url: API_ROOT,
+        method: 'POST',
+        data: data,
+        success: function(result) {
+          addItem(result);
+        },  // 请求成功后调用此方法
+        fail: function(error) {
+          console.log('请求失败了哟');
+        }    // 请求失败或出错后调用此方法
+      });
     }
 
     // TODO: update user info,when success, run updateItem
     // 提示：Math.random().toString(36).substring(2) 生成随机的字符串
     function updateItemData(id) {
-
+      ajax({
+        url: API_ROOT + '/' + id,
+        method: 'PUT',
+        data: {
+          username: Math.random().toString(36).substring(2),
+          password: Math.random().toString(36).substring(2)
+        },
+        success: function(result) {
+          updateItem(result);
+        },  // 请求成功后调用此方法
+        fail: function(error) {
+          console.log('请求失败了哟');
+        }    // 请求失败或出错后调用此方法
+      });
     }
 
     // TODO: delete user info,,when success, run  deleteItem
     function deleteItemData(id) {
-
+        ajax({
+          url: API_ROOT + '/' + id,
+          method: 'DELETE',
+          success: function(result) {
+            deleteItem(id);
+          },  // 请求成功后调用此方法
+          fail: function(error) {
+            console.log('请求失败了哟');
+          }    // 请求失败或出错后调用此方法
+        });
     }
 
     document.getElementById('add-btn').addEventListener('click', function () {
